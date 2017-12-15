@@ -5,6 +5,7 @@
 #include "LCDC.h"
 #include "LCDC_registermap.h"
 #include "ensitlm.h"
+#include "generator.h"
 
 using namespace std;
 using namespace sc_core;
@@ -162,6 +163,9 @@ tlm::tlm_response_status LCDC::write(const ensitlm::addr_t &a,
 		int_register = d;
 		if (int_register == 0)
 			display_int.write(false);
+		break;
+	case LCDC_START_REG:
+		started = d;
 		break;
 	default:
 		cerr << name() << ": Write access outside register range!"
